@@ -1,0 +1,146 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.exercice/PROG3_TD2/1.0.0
+info:
+  version: "latest"
+  title: PROG3 - TD2
+paths:
+  /teams:
+    get:
+      tags:
+        - Teams
+      summary: Get list of Teams
+      operationId: getAll
+      responses:
+        '200':
+          description: List of all teams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+  /players:
+    get:
+      tags:
+        - Players
+      summary: Get list of Players
+      operationId: getAll
+      responses:
+        '200':
+          description: List of all Players
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+  /matchs:
+    get:
+      tags:
+        - Matchs
+      summary: Get the list of all Matches
+      operationId: getMatches
+      responses:
+        '200':
+          description: List of all Matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        '404':
+          description: Not Found
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        players:
+          type: array
+          items:
+            $ref: "#/components/schemas/Player"
+        sponsors:
+          type: array
+          items:
+            $ref: "#/components/schemas/Sponsor"
+      allOf:
+        - $ref: '#/components/schemas/CreateTeam'
+    CreateTeam:
+      type: object
+      properties:
+        name:
+          type: string
+        players:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+        sponsors:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+    UpdateTeam:
+      type: object
+      properties:
+        id:
+          type: integer
+      allOf:
+        - $ref: "#/components/schemas/CreateTeam"
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+    CreatePlayer:
+      type: object
+      properties:
+        name:
+          type: string
+        number:
+          type: integer
+    Sponsor:
+      type: object
+      properties:
+        id:
+          type: integer
+      allOf:
+        - $ref: "#/components/schemas/CreateSponsor"
+    CreateSponsor:
+      type: object
+      properties:
+        name:
+          type: string
+    Match:
+      type: object
+      properties:
+        datetime:
+          type: string
+          format: datetime
+        host:
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/Team"
+        invited:
+          type: object
+          allOf:
+            - $ref: "#/components/schemas/Team"
