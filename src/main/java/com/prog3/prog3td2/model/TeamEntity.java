@@ -28,5 +28,5 @@ public class TeamEntity {
     private String name;
 
     @ManyToMany(mappedBy = "team")
-    private Set<SponsorEntity> groups;
+    private Set<SponsorEntity> sponsor;
 }

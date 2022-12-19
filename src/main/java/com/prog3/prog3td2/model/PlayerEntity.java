@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "player")
 @Data
@@ -29,5 +31,5 @@ public class PlayerEntity {
 
     @OneToMany
     @JoinColumn(name = "team_id")
-    private TeamEntity team;
+    private Set<TeamEntity> team;
 }
