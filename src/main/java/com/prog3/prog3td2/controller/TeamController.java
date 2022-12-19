@@ -16,7 +16,7 @@ public class TeamController {
 
     private final TeamMapper mapper;
 
-    @GetMapping("/players")
+    @GetMapping("/teams")
     public List<TeamResponse> findPlayers(){
         return service.getTeams().stream()
                 .map(mapper::toRest).toList();
