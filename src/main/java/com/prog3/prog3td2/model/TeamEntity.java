@@ -1,5 +1,6 @@
 package com.prog3.prog3td2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +29,8 @@ public class TeamEntity {
     private String name;
 
     @ManyToMany(mappedBy = "team")
+    @JsonIgnore
     private Set<SponsorEntity> sponsor;
+
+
 }
