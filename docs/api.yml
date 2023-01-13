@@ -104,9 +104,6 @@ components:
               type: integer
     Goal:
       type: object
-      properties:
-        id:
-          type: integer
       allOf:
         - $ref: "#components/schemas/CreateGoal"
     Match:
@@ -119,13 +116,11 @@ components:
           type: object
           allOf:
             - $ref: "#/components/schemas/Team"
+            - $ref: "#/components/schemas/Goal"
         invited:
           type: object
           allOf:
             - $ref: "#/components/schemas/Team"
+            - $ref: "#/components/schemas/Goal"
         stadium:
           type: string
-        score:
-          type: object
-          allOf:
-            - $ref: "#/components/schemas/Goal"
